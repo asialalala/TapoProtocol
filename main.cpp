@@ -34,6 +34,13 @@ void join()
 
 void discover()
 {
+    std::cout << "Device discovering..." << std::endl;
+    std::string target = "255.255.255.255"; // subnet mask
+    std::string username = "asklas@op.pl";
+    std::string password = "asia2002";
+    int  discoveryTimeout = 3;
+    int timeout = 1;
+    int port = 80;
 
 }
 
@@ -191,6 +198,21 @@ void turnOnBehavior()
 
 void updateCredentials()
 {
-    
+
+}
+
+void shell()
+{
+
+}
+
+void feature()
+{
+
+}
+
+void printFeature()
+{
+
 }
 

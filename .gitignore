@@ -1,0 +1,9 @@
+# VirtualEnvs
+venv
+.venv
+
+/build
+
+# vscode
+.vscode
+
