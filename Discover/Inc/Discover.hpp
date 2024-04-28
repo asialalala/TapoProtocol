@@ -4,6 +4,9 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <map>
+
+#include "Device.hpp" 
 
 #define DISCOVERY_PORT 9999
 #define DISCOVERY_QUERY                \
@@ -16,6 +19,7 @@
         }                              \
     }
 
+typedef  std::map<std::string, std::map<std::string, Device>> DeviceDict;
 class Discover
 {
 private:
