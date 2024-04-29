@@ -8,11 +8,3 @@ public:
     Device(/* args */);
     ~Device();
 };
-
-Device::Device(/* args */)
-{
-}
-
-Device::~Device()
-{
-}

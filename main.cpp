@@ -1,12 +1,12 @@
 #include <iostream>
+#include "Device.hpp"
+#include "Discover.hpp"
+
 
 enum deviceType {
     smartBulb
 };
-int main(int argc, char *argv[])
-{
 
-}
 void cli()
 {
 
@@ -41,6 +41,10 @@ void discover()
     int  discoveryTimeout = 3;
     int timeout = 1;
     int port = 80;
+
+    std::cout <<  "Discovering devices on " << target << " for " <<  discoveryTimeout << " second." << std::endl;
+    Discover discover;
+    Device device = discover.DiscoverDevices(password, username, port, timeout, target, discoveryTimeout);
 
 }
 
@@ -216,3 +220,8 @@ void printFeature()
 
 }
 
+
+int main(int argc, char *argv[])
+{
+    discover();
+}
