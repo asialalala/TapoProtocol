@@ -20,20 +20,25 @@
         }                              \
     }
 
-typedef std::map<std::string, std::map<std::string, Device>> DeviceDict;
-class Discover
-{
-private:
-    /* data */
+class Discover {
 public:
-    Discover(/* args */);
+    Discover();
     ~Discover();
-    Device DiscoverDevices(
-        std::string pwassword,
-        std::string mail,
-        int port,
-        int timeout,
-        std::string target = "255.255.255.255",
-        int discoveryTimeout = 5,
-        int discoveryPackets = 3);
+    static DeviceDict discover(
+        std::string target, int discoveryTimeout,
+        std::function<void(Device)> onDiscovered,
+        std::function<void(UnsupportedDeviceError)> onUnsupported,
+        int port, int timeout, Credentials* credentials) {
+
+        DeviceDict discoveredDevices;
+        std::vector<UnsupportedDeviceError> unsupportedDevices;
+        std::mutex mutex;
+
+        // Implementation of device discovery logic
+        // Use on_discovered callback for discovered devices
+        // Use on_unsupported callback for unsupported devices
+        // Populate discovered_devices map with discovered devices
+
+        return discoveredDevices;
+    }
 };
