@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <functional>
 
 #include "Device.hpp"
 
@@ -20,15 +21,22 @@
         }                              \
     }
 
-class Discover {
+class Discover
+{
 public:
     Discover();
     ~Discover();
     static DeviceDict discover(
-        std::string target, int discoveryTimeout,
         std::function<void(Device)> onDiscovered,
         std::function<void(UnsupportedDeviceError)> onUnsupported,
-        int port, int timeout, Credentials* credentials) {
+        Credentials* credentials,
+        const std::string &target = "255.255.255.255",
+        int discoveryTimeout = 5,
+        int port = 9999,
+        int timeout = 0,
+        const std::string &interface = "",
+        int discoveryPackets = 3)
+    {
 
         DeviceDict discoveredDevices;
         std::vector<UnsupportedDeviceError> unsupportedDevices;

@@ -29,14 +29,15 @@ public:
         }
 
         std::cout << "Discovering devices on " << target << " for " << discoveryTimeout << " second." << std::endl;
-        
+        std::function<void(Device)> printDisc= printDiscovered;
+        std::function<void(UnsupportedDeviceError)> printUnSupp= printUnsupported;
+
         std::map<std::string, Device> discoveredDevices = Discover::discover(
-            target, discoveryTimeout,
-            [this](Device dev)
-            { printDiscovered(dev); },
-            [this](UnsupportedDeviceError error)
-            { printUnsupported(error); },
-            port, timeout, credentials);
+            printDisc,
+            printUnSupp,
+            credentials, target, 
+            discoveryTimeout,
+            port, timeout);
 
         delete credentials;
 
@@ -44,12 +45,12 @@ public:
     }
 
 private:
-    void printDiscovered(Device dev)
+    static void printDiscovered(Device dev)
     {
         // Implementation of print_discovered callback
     }
 
-    void printUnsupported(UnsupportedDeviceError error)
+    static void printUnsupported(UnsupportedDeviceError error)
     {
         // Implementation of print_unsupported callback
     }
