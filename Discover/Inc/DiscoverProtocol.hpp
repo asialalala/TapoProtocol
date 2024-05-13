@@ -3,29 +3,38 @@
 */
 
 #pragma once
-#define  DISCOVERY_START_TIMEOUT 1
+#include "Device.hpp"
+#include <asio.hpp>
 
 class DiscoverProtocol
 {
 private:
     /* data */
-    int m_transport;
+    std::string m_target;
+    std::function<void(Device)> m_onDiscovered;
     int m_discoveryPackets;
-    int m_interface;
-    int m_onDiscovered;
+    std::string m_interface;
+    std::function<void(UnsupportedDeviceError)> m_onUnsupported;
+    Credentials* m_credentials;
+    int m_timeout;
+    int m_discoveryTimeout;
     int m_port;
-    int m_discoveryPort;
-    int timeout;
 
 public:
-    DiscoverProtocol(/* args */);
+    DiscoverProtocol(const std::string &target, std::function<void(Device)> onDiscovered,
+                     int discoveryPackets, const std::string &interface,
+                     std::function<void(UnsupportedDeviceError)> onUnsupported, Credentials *credentials,
+                     int timeout, int discoveryTimeout, int port) : m_target(target),
+                                                                    m_onDiscovered(onDiscovered),
+                                                                    m_discoveryPackets(discoveryPackets),
+                                                                    m_interface(interface),
+                                                                    m_onUnsupported(onUnsupported),
+                                                                    m_credentials(credentials),
+                                                                    m_timeout(timeout),
+                                                                    m_discoveryTimeout(discoveryTimeout),
+                                                                    m_port(port)
+    {
+    }
     ~DiscoverProtocol();
 };
 
-DiscoverProtocol::DiscoverProtocol(/* args */)
-{
-}
-
-DiscoverProtocol::~DiscoverProtocol()
-{
-}

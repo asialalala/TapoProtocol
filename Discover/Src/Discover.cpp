@@ -1,4 +1,5 @@
 #include "Discover.hpp"
+#include "DiscoverProtocol.hpp"
 
 Discover::Discover(std::function<void(Device)> onDiscovered,
                    std::function<void(UnsupportedDeviceError)> onUnsupported,
@@ -33,10 +34,11 @@ DeviceDict Discover::discover()
     std::vector<UnsupportedDeviceError> unsupportedDevices;
     std::mutex mutex;
 
-    // Implementation of device discovery logic
-    // Use on_discovered callback for discovered devices
-    // Use on_unsupported callback for unsupported devices
-    // Populate discovered_devices map with discovered devices
+    asio::io_context io_context;
+    // DiscoverProtocol protocol(m_target, m_onDiscovered, m_discoveryPackets, m_interface, m_onUnsupported, m_credentials, m_timeout, m_discoveryTimeout, m_port);
+    auto protocol = std::make_shared<DiscoverProtocol>(m_target, m_onDiscovered, m_discoveryPackets, m_interface, m_onUnsupported, m_credentials, m_timeout, m_discoveryTimeout, m_port);
+    // Create transport object and run protocol
+    io_context.run();
 
     return discoveredDevices;
 };
