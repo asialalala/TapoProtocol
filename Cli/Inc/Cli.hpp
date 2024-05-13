@@ -32,12 +32,13 @@ public:
         std::function<void(Device)> printDisc= printDiscovered;
         std::function<void(UnsupportedDeviceError)> printUnSupp= printUnsupported;
 
-        std::map<std::string, Device> discoveredDevices = Discover::discover(
+        Discover discover(
             printDisc,
             printUnSupp,
             credentials, target, 
             discoveryTimeout,
             port, timeout);
+        std::map<std::string, Device> discoveredDevices = discover.discover();
 
         delete credentials;
 
